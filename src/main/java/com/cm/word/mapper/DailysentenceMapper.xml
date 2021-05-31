@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cm.word.dao.DailysentenceMapper">
+
+  <resultMap id="BaseResultMap" type="com.cm.word.model.Dailysentence">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sentence" jdbcType="VARCHAR" property="sentence" />
+    <result column="translation" jdbcType="VARCHAR" property="translation" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+  </resultMap>
+
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cm.word.model.Dailysentence">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, sentence, translation, img
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cm_word_dailysentence
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cm_word_dailysentence
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cm.word.model.Dailysentence">
+    insert into cm_word_dailysentence (id, sentence, translation, 
+      img, description)
+    values (#{id,jdbcType=BIGINT}, #{sentence,jdbcType=VARCHAR}, #{translation,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cm.word.model.Dailysentence">
+    insert into cm_word_dailysentence
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sentence != null">
+        sentence,
+      </if>
+      <if test="translation != null">
+        translation,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sentence != null">
+        #{sentence,jdbcType=VARCHAR},
+      </if>
+      <if test="translation != null">
+        #{translation,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cm.word.model.Dailysentence">
+    update cm_word_dailysentence
+    <set>
+      <if test="sentence != null">
+        sentence = #{sentence,jdbcType=VARCHAR},
+      </if>
+      <if test="translation != null">
+        translation = #{translation,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cm.word.model.Dailysentence">
+    update cm_word_dailysentence
+    set sentence = #{sentence,jdbcType=VARCHAR},
+      translation = #{translation,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cm.word.model.Dailysentence">
+    update cm_word_dailysentence
+    set sentence = #{sentence,jdbcType=VARCHAR},
+      translation = #{translation,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--自定义查询-->
+  <select id="selectDailySentence" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cm_word_dailysentence
+  </select>
+
+
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cm.word.dao.WordrecommendMapper">
+
+  <resultMap id="BaseResultMap" type="com.cm.word.model.Wordrecommend">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="firstpicture" jdbcType="VARCHAR" property="firstpicture" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, title, firstpicture, description, href, color
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_word_recommend
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cm_word_recommend
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cm.word.model.Wordrecommend">
+    insert into cm_word_recommend (id, title, firstpicture, 
+      description, href, color
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{firstpicture,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cm.word.model.Wordrecommend">
+    insert into cm_word_recommend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="firstpicture != null">
+        firstpicture,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="href != null">
+        href,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="firstpicture != null">
+        #{firstpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null">
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cm.word.model.Wordrecommend">
+    update cm_word_recommend
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="firstpicture != null">
+        firstpicture = #{firstpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null">
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cm.word.model.Wordrecommend">
+    update cm_word_recommend
+    set title = #{title,jdbcType=VARCHAR},
+      firstpicture = #{firstpicture,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectRecommend" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from cm_word_recommend
+    limit #{start}, #{end}
+  </select>
+
+</mapper>

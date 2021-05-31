@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cm.word.dao.HomecarouselMapper">
+
+  <resultMap id="BaseResultMap" type="com.cm.word.model.Homecarousel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, img, url, message
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cm_word_homecarousel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cm_word_homecarousel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cm.word.model.Homecarousel">
+    insert into cm_word_homecarousel (id, img, url, 
+      message)
+    values (#{id,jdbcType=BIGINT}, #{img,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cm.word.model.Homecarousel">
+    insert into cm_word_homecarousel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="message != null">
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cm.word.model.Homecarousel">
+    update cm_word_homecarousel
+    <set>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cm.word.model.Homecarousel">
+    update cm_word_homecarousel
+    set img = #{img,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <!--自定义查询-->
+  <select id="selectCarousel" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cm_word_homecarousel
+  </select>
+
+
+</mapper>

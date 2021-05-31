@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cm.word.dao.SeniorhighschoolMapper">
+  <resultMap id="BaseResultMap" type="com.cm.word.model.Seniorhighschool">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="word" jdbcType="VARCHAR" property="word" />
+    <result column="chinese" jdbcType="VARCHAR" property="chinese" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="createtime" jdbcType="VARCHAR" property="createtime" />
+    <result column="updatetime" jdbcType="VARCHAR" property="updatetime" />
+    <result column="example" jdbcType="VARCHAR" property="example" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="voice" jdbcType="VARCHAR" property="voice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, word, chinese, type, createtime, updatetime, example, picture, voice
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from senior_high_school_word
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from senior_high_school_word
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cm.word.model.Seniorhighschool">
+    insert into senior_high_school_word (id, word, chinese, 
+      type, createtime, updatetime, 
+      example, picture, voice
+      )
+    values (#{id,jdbcType=BIGINT}, #{word,jdbcType=VARCHAR}, #{chinese,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{createtime,jdbcType=VARCHAR}, #{updatetime,jdbcType=VARCHAR}, 
+      #{example,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{voice,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cm.word.model.Seniorhighschool">
+    insert into senior_high_school_word
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="word != null">
+        word,
+      </if>
+      <if test="chinese != null">
+        chinese,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="example != null">
+        example,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="voice != null">
+        voice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="word != null">
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="chinese != null">
+        #{chinese,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="example != null">
+        #{example,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null">
+        #{voice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cm.word.model.Seniorhighschool">
+    update senior_high_school_word
+    <set>
+      <if test="word != null">
+        word = #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="chinese != null">
+        chinese = #{chinese,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="example != null">
+        example = #{example,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null">
+        voice = #{voice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cm.word.model.Seniorhighschool">
+    update senior_high_school_word
+    set word = #{word,jdbcType=VARCHAR},
+      chinese = #{chinese,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=VARCHAR},
+      example = #{example,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      voice = #{voice,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <!--自定义查询-->
+  <select id="querySeniorhighschoolWordLimit" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from senior_high_school_word
+    limit #{start} , #{end}
+  </select>
+
+  <select id="selectseniorSchoolWordCount" resultType="Integer">
+    select count(id)
+    from senior_high_school_word
+  </select>
+</mapper>
